@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  react-app:
+    build: .
+    ports:
+      - "5173:5173" # Map container port to your machine port
+    volumes:
+      - .:/app      # Sync your local code with the container
+      - /app/node_modules # Prevent syncing of node_modules
+    stdin_open: true
+    environment:
+      - CHOKIDAR_USEPOLLING=true # Ensures hot reload works in Docker
+    command: ["npm", "run", "dev"]
